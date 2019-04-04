@@ -1,0 +1,13 @@
+{
+    "name": "meryem/blog",
+    "authors": [
+        {
+            "name": "meryem",
+            "email": "meryem@energiedin.com"
+        }
+    ],
+     "autoload": {
+        "psr-4": {"App\\": "src/"}
+    },
+    "require": {}
+}

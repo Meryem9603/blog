@@ -1,0 +1,40 @@
+header{
+	background-color: #8ad6f9 ;
+	padding-bottom: 20px;
+}
+
+#title_blog{
+	font-size: 40px;
+	font-family: 'ZCOOL XiaoWei', serif;
+	color: white;
+	text-align: center;
+}
+
+#form_connexion{
+	margin-top: 100px;
+	margin-left:33%;
+}
+
+}
+#alaska{
+	max-width: 100%;
+}
+.intro, .article{
+	margin-top: 30px;
+}
+.a{
+	color:#0a0a13;
+}
+.text_footer ,.icone_footer{
+	color:white;
+}
+
+
+footer
+{background:#2d2d2d;
+color:white;
+padding:20px;
+margin-top:30px;}
+
+.title_footer
+{font-size:20px;font-weight:bold;}
