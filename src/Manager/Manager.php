@@ -11,14 +11,12 @@ abstract class Manager
 		$this->connect();
 	}
 	public function connect(){
-		//try {
+		
 			$this->db = new \PDO ('mysql:host=localhost;dbname=blog', 'root', '');
 		    $this->db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
 		    $this->db->exec("set names utf8");
 
-		/*} catch (\Exception $e) {
-			echo "une erreur trouvée lors de la connexion à la base de données !";
-		}*/
+		
 		
 	}
 

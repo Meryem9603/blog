@@ -115,7 +115,7 @@
       <li class="nav-item">
         <a class="nav-link" href="?action=admin">
           <i class="fas fa-fw fa-book"></i>
-          <span>Articles</span></a>f
+          <span>Articles</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="?action=admin">

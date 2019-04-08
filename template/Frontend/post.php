@@ -58,14 +58,14 @@
       			    </div>
       			    <p class="mb-1"><?=$comment->getComment()?>.</p>
       			    <small><?=$comment->getCreated()?></small>
-                <a href="?report=<?=$comment->getId()?>" class="btn btn-danger float-right">Signaler</a>
+                <a href="?action=report&id=<?=$comment->getId()?>" class="btn btn-danger float-right">Signaler</a>
       			  </div>
                	<?php
                }
                ?>
                <div class="list-group-item flex-column align-items-start ">
                 <div class="col-md-8 ">
-                   <form method="POST" action='/Blog/public/index.php'>
+                   <form method="POST" action='?action=createcomment'>
                       <label>Nom et Prénom :</label>
                       <input type="text" name="username" class="form-control" >
                       <label>Adresse é-mail :</label>
