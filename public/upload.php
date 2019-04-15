@@ -1,5 +1,5 @@
 <?php
-$target_dir = "admin\uploads\\";
+$target_dir = "admin/uploads/";
 
 $target_file = $target_dir . basename($_FILES["image"]["name"]);
 $uploadOk = 1;
@@ -39,7 +39,7 @@ if ($uploadOk == 0) {
 } else {
     if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
         $image_name = $uniquename;
-        echo "The file ". $uniquename. " has been uploaded.";
+        echo "cccccccThe file ". $uniquename. " has been uploaded.";
     } else {
         echo "Sorry, there was an error uploading your file.";
     }

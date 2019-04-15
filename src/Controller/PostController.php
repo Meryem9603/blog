@@ -6,8 +6,10 @@ use App\Model\Post;
 
 class PostController 
 {
-	public function listPosts($limit = 9)
+
+	public function liste()
 	{
+		$limit = $_GET['limit'];
 		#afficher list post
 		if(isset($_GET['page'])){
 			$page = $_GET['page'];
@@ -22,12 +24,12 @@ class PostController
 		require '..\template\Frontend\index.php';
 	}
 
-	public function getPost(){
+	public function show(){
 		if(isset($_GET['id']) && !empty($_GET['id'])){
 			#get post from DB
 			$postManager = new PostManager();
 			$post = $postManager->detailPost($_GET['id']);
-			$commentManager = new CommentManager;
+			$commentManager = new CommentManager();
 			$comments = $commentManager->listComments($post);
 			$allPosts = $postManager->listAllPosts();
 
@@ -36,38 +38,32 @@ class PostController
 		}
 	}
 
-	public function createPost()
+	public function create()
 	{
 		if (isset($_SESSION['username']) && !empty($_SESSION['username'])) {
 
-			if(isset($_POST['title']) && isset($_POST['content']) && !empty($_POST['title']) && !empty($_POST['content']) && isset($_FILES['image']) && !empty($_FILES['image'])) {
-					$post = new Post();
-					$post->setAuthor("Jean Forteroche");
-					$post->setTitle($_POST['title']);
-					$post->setContent($_POST['content']);
-					$image_name = "";
-					require 'upload.php';
-					if(isset($image_name)){
-						$post->setPicture($image_name);
-					}
-				$postManager = new PostManager();
-				$postManager->add($post);
-				if($post->getId() != null){
-					echo "L'article ".  $post->setTitle()." a bien été ajouté!";
-					header("Location: //".$_SERVER['HTTP_HOST']."/Blog/public/index.php?action=admin");
-				}
-			}else{
-				echo "Veuillez remplir tous les champs !";
-			}
-	
-			require '..\template\Backend\newpost.php';
-		}else{
-			echo "accès interdit au non admins!";
-		}
-	}
+			if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
-	public function newPost(){
-		if (isset($_SESSION['username']) && !empty($_SESSION['username'])) {
+				if(isset($_POST['title']) && isset($_POST['content']) && !empty($_POST['title']) && !empty($_POST['content']) && isset($_FILES['image']) && !empty($_FILES['image'])) {
+						$post = new Post();
+						$post->setAuthor("Jean Forteroche");
+						$post->setTitle($_POST['title']);
+						$post->setContent($_POST['content']);
+						$image_name = "";
+						require 'upload.php';
+						if(!empty($image_name)){
+							$post->setPicture($image_name);
+						}
+					$postManager = new PostManager();
+					$postManager->add($post);
+					if($post->getId() != null){
+						echo "L'article ".  $post->setTitle()." a bien été ajouté!";
+						header("Location: //".$_SERVER['HTTP_HOST']."/Blog/public/index.php?action=admin");
+					}
+				}else{
+					echo "Veuillez remplir tous les champs !";
+				}
+			}
 			require '..\template\Backend\newpost.php';
 		}else{
 			echo "accès interdit au non admins!";

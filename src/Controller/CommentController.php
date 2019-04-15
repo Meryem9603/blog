@@ -5,7 +5,7 @@ use App\Model\Comment;
 
 class CommentController{
 
-	public function listComment(){
+	public function list(){
 		if(isset($_SESSION['username']) && !empty($_SESSION['username'])){
 			$commentManager = new commentManager();
 			$comments = $commentManager->listAllComments();
@@ -15,7 +15,7 @@ class CommentController{
 		}
 	}
 
-	public function deleteComment(){
+	public function delete(){
 		if(isset($_SESSION['username']) && !empty($_SESSION['username'])){
 			
 			$id = $_GET['id'];
@@ -34,7 +34,7 @@ class CommentController{
 		}
 	}
 
-	function createComment(){
+	function create(){
 		if(isset($_POST['username']) && isset($_POST['mail'])&& isset($_POST['comment']) && isset($_POST['post_id']) &&  !empty($_POST['username']) && !empty($_POST['mail']) && !empty($_POST['comment']) && !empty($_POST['post_id']) ) {
 
 			$comment = new Comment();

@@ -4,25 +4,37 @@ require '..\vendor\autoload.php';
 
 use App\Model\Post;
 use App\Model\Comment;
-use App\Controller\Login;
+use App\Controller\SecurityController;
 use App\Controller\PostController;
 use App\Controller\CommentController;
 
 $postController = new PostController();
 $commentController = new CommentController();
 
+require '../config/routes.php';
+$action = $_GET['action'];
+if(!isset($routes[$action])){
+	echo "page introuvable !";
+}else{
+	$controller = $routes[$action]['controller'];
+	$method = $routes[$action]['method'];
+	$object = new $controller();
+	$object->{$method}();
+}
+
 
 #ajouter un nouveau commentaire
-if(isset($_GET['action']) && $_GET['action']=='createcomment'){
+/*if(isset($_GET['action']) && $_GET['action']=='createcomment'){
 	
 	$commentController->createComment();
 }elseif(isset($_GET['action']) && $_GET['action']=='report' && !empty($_GET['id']) ){
 
 	$commentController->report();
 }
-elseif(isset($_GET['action']) && $_GET['action']=='detailpost'){
+
+elseif(isset($_GET['action']) && $_GET['action']=='show'){
 	$postController = new PostController();
-	$postController->getPost();
+	$postController->show();
 
 }elseif(isset($_GET['action']) && $_GET['action'] == "admin" ){
 	
@@ -62,20 +74,16 @@ elseif (isset($_GET['action']) && $_GET['action'] == 'formlogin') {
 }
 #login
 elseif (isset($_GET['action']) && $_GET['action'] == 'login') {
-	if(isset($_POST['username']) && isset($_POST['password']) &&!empty($_POST['username']) && !empty($_POST['password']) ){
-		$login = new Login();
-		$connected = $login->authentification($_POST['username'],$_POST['password']);
-		if($connected == 1){
-			header("Location: //".$_SERVER['HTTP_HOST']."/Blog/public/index.php?action=admin");
-		}else{
-			echo "mauvais identifiants";
-		}
-	}
+		$login = new SecurityController();
+		$login->login();
+}elseif (isset($_GET['action']) && $_GET['action'] == 'logout'){
+	$security = new SecurityController();
+	$security->logout();
 }
 else{
 	#afficher list post
 	$postController = new PostController();
 	$postController->listPosts();
-}
+}*/
 
 
