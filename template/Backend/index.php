@@ -21,7 +21,7 @@
         <div class="card mb-3">
           <div class="card-header">
             <i class="fas fa-table"></i>
-            Liste articles <div class="float-right"> <a href="?action=newpost" class="btn btn-success">Ajouter un article</a></div></div>
+            Liste articles <div class="float-right"> <a href="?action=create-post" class="btn btn-success">Ajouter un article</a></div></div>
 
           <div class="card-body">
             <div class="table-responsive">
@@ -44,7 +44,7 @@
                     <td><?= substr($post->getContent(),0,100)  ?>...</td>
                     <td><?= $post->getCreated()?></td>
                     <td><?= $post->getUpdated()?></td>
-                    <td><a href="?action=editpost&id=<?= $post->getId()?>" >modifier</a> <a href="?action=deletepost&id=<?= $post->getId()?>"  onclick="return confirm('etes vous sûr de vouloir supprimer cet article ?')" >supprimer</a></td>
+                    <td><a href="?action=update-post&id=<?= $post->getId()?>" >modifier</a> <a href="?action=delete-post&id=<?= $post->getId()?>"  onclick="return confirm('etes vous sûr de vouloir supprimer cet article ?')" >supprimer</a></td>
                   </tr>
                   <?php } ?>
                   

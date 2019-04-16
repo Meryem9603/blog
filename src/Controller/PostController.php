@@ -9,7 +9,7 @@ class PostController
 
 	public function liste()
 	{
-		$limit = $_GET['limit'];
+		$limit = 9;
 		#afficher list post
 		if(isset($_GET['page'])){
 			$page = $_GET['page'];
@@ -56,10 +56,11 @@ class PostController
 						}
 					$postManager = new PostManager();
 					$postManager->add($post);
-					if($post->getId() != null){
-						echo "L'article ".  $post->setTitle()." a bien été ajouté!";
-						header("Location: //".$_SERVER['HTTP_HOST']."/Blog/public/index.php?action=admin");
-					}
+
+				
+					echo "L'article ".  $post->getTitle()." a bien été ajouté!";
+					header("Location: index.php?action=admin");
+				
 				}else{
 					echo "Veuillez remplir tous les champs !";
 				}
@@ -70,38 +71,38 @@ class PostController
 		}
 	}
 
-	public function editPost()
+	
+
+	public function update()
 	{
+
+
 		if (isset($_SESSION['username']) && !empty($_SESSION['username'])) {
 			$postManager = new PostManager();
-			$post = $postManager->detailPost($_GET['id']);
-			require '..\template\Backend\editpost.php';
-		}else{
-			echo "accès interdit au non admins!";
-		}
-	}
+			if($_SERVER['REQUEST_METHOD'] == 'POST'){		
+				if(isset($_POST['title']) && isset($_POST['content']) && !empty($_POST['title']) && !empty($_POST['content']) && $_POST['id']){
+					$post = $postManager->detailPost($_POST['id']);
+					if ($post) {
+					
+						$post->setTitle($_POST['title']);
+						$post->setContent($_POST['content']);
 
-	public function updatePost()
-	{
-		if (isset($_SESSION['username']) && !empty($_SESSION['username'])) {
-			if(isset($_POST['title']) && isset($_POST['content']) && !empty($_POST['title']) && !empty($_POST['content']) && $_POST['id']){
-				$post = $postManager->detailPost($_POST['id']);
-				if ($post) {
-				
-					$post->setTitle($_POST['title']);
-					$post->setContent($_POST['content']);
+						$postManager->update($post);
 
-					$postManager->update($post);
-
-					header("Location: //".$_SERVER['HTTP_HOST']."/Blog/public/index.php?action=admin");
+						header("Location: index.php?action=admin");
+					}
 				}
+			}else{
+				
+				$post = $postManager->detailPost($_GET['id']);
+				require '..\template\Backend\editpost.php';
 			}
 		}else{
 			echo "accès interdit au non admins!";
 		}
 	}
 
-	public function deletePost()
+	public function delete()
 	{
 		if (isset($_SESSION['username']) && !empty($_SESSION['username'])) {
 			$postManager = new PostManager();
@@ -109,7 +110,7 @@ class PostController
 			if($post){
 
 				$postManager->delete($post);
-				header("Location: //".$_SERVER['HTTP_HOST']."/Blog/public/index.php?action=admin");
+				header("Location:index.php?action=admin");
 			}else{
 				echo "article introuvable";
 			}

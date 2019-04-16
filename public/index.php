@@ -2,18 +2,10 @@
 session_start();
 require '..\vendor\autoload.php';
 
-use App\Model\Post;
-use App\Model\Comment;
-use App\Controller\SecurityController;
-use App\Controller\PostController;
-use App\Controller\CommentController;
+$routes = require '../config/routes.php';
 
-$postController = new PostController();
-$commentController = new CommentController();
-
-require '../config/routes.php';
-$action = $_GET['action'];
-if(!isset($routes[$action])){
+$action = isset($_GET['action'])? $_GET['action'] : null ;
+if(!isset($routes[$action]) or !$action){
 	echo "page introuvable !";
 }else{
 	$controller = $routes[$action]['controller'];
@@ -21,7 +13,6 @@ if(!isset($routes[$action])){
 	$object = new $controller();
 	$object->{$method}();
 }
-
 
 #ajouter un nouveau commentaire
 /*if(isset($_GET['action']) && $_GET['action']=='createcomment'){

@@ -27,7 +27,7 @@
           <span>Articles</span></a>f
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="?action=comment">
+        <a class="nav-link" href="?action=list-comments">
           <i class="fas fa-fw fa-comments"></i>
           <span>Commentaires</span></a>
       </li>

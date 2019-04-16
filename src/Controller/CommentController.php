@@ -5,7 +5,7 @@ use App\Model\Comment;
 
 class CommentController{
 
-	public function list(){
+	public function liste(){
 		if(isset($_SESSION['username']) && !empty($_SESSION['username'])){
 			$commentManager = new commentManager();
 			$comments = $commentManager->listAllComments();
@@ -27,7 +27,7 @@ class CommentController{
 				echo "le commentaire est introuvable";
 			}
 			
-			header("Location: //".$_SERVER['HTTP_HOST']."/Blog/public/index.php?action=comment");
+			header("Location: index.php?action=list-comments");
 		
 		}else{
 			echo "l'accés est interdit";
@@ -44,7 +44,8 @@ class CommentController{
 			$comment->setPost($_POST['post_id']);
 			$commentManager = new commentManager();
 			$commentManager->add($comment);
-
+			header("Location:index.php?action=detailpost&id=".$_POST['post_id']);
+		
 		}else{
 			echo "Veuillez remplir tous les champs !";
 		}
@@ -61,6 +62,7 @@ class CommentController{
 		$commentReport->setReport($newReport);
 		$commentManager->addReport($commentReport);
 
+		header("Location:index.php?action=detailpost&id=".$commentReport->getPost());
 		echo "le commentaire a bien été signalé !";
 	}
 	

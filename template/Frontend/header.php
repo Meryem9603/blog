@@ -24,8 +24,8 @@
   
 
   <form class="col-lg-3 mx-auto ">
-    <a href="/Blog/public/index.php" id="accueil" class="btn btn-secondary btn-lg">Accueil</a>
-    <a  href="?action=formlogin" class="btn btn-secondary btn-lg">Connexion</a>
+    <a href="/Blog/public/index.php?action=home" id="accueil" class="btn btn-secondary btn-lg">Accueil</a>
+    <a  href="?action=login" class="btn btn-secondary btn-lg">Connexion</a>
   </form>
 </header>
 

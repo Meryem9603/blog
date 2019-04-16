@@ -143,7 +143,7 @@
             Liste articles <div class="float-right"> <a href="?action=newpost" class="btn btn-success">Ajouter un article</a></div></div>
 
           <div class="card-body">
-            <form method="POST" action="?action=creatpost" enctype="multipart/form-data">
+            <form method="POST" action="?action=create-post" enctype="multipart/form-data">
           <div class="form-group">
             <div class="form-row">
               <div class="col-md-6">
