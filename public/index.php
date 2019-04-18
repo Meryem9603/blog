@@ -4,7 +4,12 @@ require '..\vendor\autoload.php';
 
 $routes = require '../config/routes.php';
 
-$action = isset($_GET['action'])? $_GET['action'] : null ;
+if(!isset($_GET['action'])){
+	$action = 'home';
+}else{
+	$action =  $_GET['action'] ;
+}
+
 if(!isset($routes[$action]) or !$action){
 	echo "page introuvable !";
 }else{

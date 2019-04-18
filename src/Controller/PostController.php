@@ -29,12 +29,18 @@ class PostController
 			#get post from DB
 			$postManager = new PostManager();
 			$post = $postManager->detailPost($_GET['id']);
-			$commentManager = new CommentManager();
-			$comments = $commentManager->listComments($post);
-			$allPosts = $postManager->listAllPosts();
+			if($post){
+				$commentManager = new CommentManager();
+				$comments = $commentManager->listComments($post);
+				$allPosts = $postManager->listAllPosts();
+				#require post template
+				require '..\template\Frontend\post.php';
+			}else{
+				require '..\template\Backend\404.html';
+			}
+			
 
-			#require post template
-			require '..\template\Frontend\post.php';
+			
 		}
 	}
 
