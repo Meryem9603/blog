@@ -2,10 +2,10 @@
 
 
 
-  <div class='container' >
-    <div class="row intro" >  
-      <div class="col-lg-5"><p><img src="alaska.jpg" alt="photo de l'alaska" id="alaska"></p></div>
-       <div class="col-lg-7"><p>Bonjour, je suis Jean Forteroche, acteur et écrivain, je vous souhaite la bienvenue sur mon blog où vous allez trouver la version numérique de mon dernier roman intitulé ‘Billet simple pour l’Alaska‘, N’hésitez pas à y laisser des commentaires.
+  <div class="container" >
+    <div class="row intro" >
+      <div class="col-md-6"><p><img src="alaska.jpg" alt="photo de l'alaska" id="alaska"></p></div>
+       <div class="col-md-5"><p>Bonjour, je suis Jean Forteroche, acteur et écrivain, je vous souhaite la bienvenue sur mon blog où vous allez trouver la version numérique de mon dernier roman intitulé ‘Billet simple pour l’Alaska‘, N’hésitez pas à y laisser des commentaires.
        Je vous souhaite une bonne lecture.
 
 </p></div>
@@ -55,7 +55,7 @@
   <ul class="pagination">
    <?php for ($i=1; $i <= $total_pages ; $i++) { ?>
     
-     <li class="page-item active"> 
+     <li class="page-item "> 
       <?php echo '<a class="page-link" href="?page='.$i.'">'.$i.'</a>' ?>
     
       </li>

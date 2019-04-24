@@ -25,56 +25,44 @@ class PostController
 	}
 
 	public function show(){
-		if(isset($_GET['id']) && !empty($_GET['id'])){
-			#get post from DB
-			$postManager = new PostManager();
-			$post = $postManager->detailPost($_GET['id']);
-			if($post){
-				$commentManager = new CommentManager();
-				$comments = $commentManager->listComments($post);
-				$allPosts = $postManager->listAllPosts();
-				#require post template
-				require '..\template\Frontend\post.php';
-			}else{
-				require '..\template\Backend\404.html';
-			}
-			
-
-			
-		}
+		
+		#get post from DB
+		$postManager = new PostManager();
+		$post = $postManager->detailPost($_GET['id']);
+		$commentManager = new CommentManager();
+		$comments = $commentManager->listComments($post);
+		$allPosts = $postManager->listAllPosts();
+		#require post template
+		require '..\template\Frontend\post.php';	
 	}
 
 	public function create()
 	{
-		if (isset($_SESSION['username']) && !empty($_SESSION['username'])) {
+		
+		if($_SERVER['REQUEST_METHOD'] == 'POST' 
+			&& isset($_POST['title']) 
+			&& isset($_POST['content']) 
+			&& !empty($_POST['title']) 
+			&& !empty($_POST['content']) 
+			&& isset($_FILES['image']) 
+			&& !empty($_FILES['image'])){
 
-			if($_SERVER['REQUEST_METHOD'] == 'POST'){
-
-				if(isset($_POST['title']) && isset($_POST['content']) && !empty($_POST['title']) && !empty($_POST['content']) && isset($_FILES['image']) && !empty($_FILES['image'])) {
-						$post = new Post();
-						$post->setAuthor("Jean Forteroche");
-						$post->setTitle($_POST['title']);
-						$post->setContent($_POST['content']);
-						$image_name = "";
-						require 'upload.php';
-						if(!empty($image_name)){
-							$post->setPicture($image_name);
-						}
-					$postManager = new PostManager();
-					$postManager->add($post);
-
-				
-					echo "L'article ".  $post->getTitle()." a bien été ajouté!";
-					header("Location: index.php?action=admin");
-				
-				}else{
-					echo "Veuillez remplir tous les champs !";
+				$post = new Post();
+				$post->setAuthor("Jean Forteroche");
+				$post->setTitle($_POST['title']);
+				$post->setContent($_POST['content']);
+				$image_name = "";
+				require 'upload.php';
+				if(!empty($image_name)){
+					$post->setPicture($image_name);
 				}
-			}
-			require '..\template\Backend\newpost.php';
-		}else{
-			echo "accès interdit au non admins!";
+				$postManager = new PostManager();
+				$postManager->add($post);
+				header("Location: index.php?action=admin");
+			
 		}
+		require '..\template\Backend\newpost.php';
+		
 	}
 
 	
@@ -82,58 +70,45 @@ class PostController
 	public function update()
 	{
 
+		$postManager = new PostManager();
+		$post = $postManager->detailPost($_GET['id']);
+		if($_SERVER['REQUEST_METHOD'] == 'POST'
+		  &&  isset($_POST['title']) 
+		  && isset($_POST['content']) 
+		  && !empty($_POST['title'])
+		  && !empty($_POST['content']) 
+		  && $_POST['id']){
+			$post = $postManager->detailPost($_POST['id']);
 
-		if (isset($_SESSION['username']) && !empty($_SESSION['username'])) {
-			$postManager = new PostManager();
-			if($_SERVER['REQUEST_METHOD'] == 'POST'){		
-				if(isset($_POST['title']) && isset($_POST['content']) && !empty($_POST['title']) && !empty($_POST['content']) && $_POST['id']){
-					$post = $postManager->detailPost($_POST['id']);
-					if ($post) {
-					
-						$post->setTitle($_POST['title']);
-						$post->setContent($_POST['content']);
+			$post->setTitle($_POST['title']);
+			$post->setContent($_POST['content']);
 
-						$postManager->update($post);
+			$postManager->update($post);
 
-						header("Location: index.php?action=admin");
-					}
-				}
-			}else{
-				
-				$post = $postManager->detailPost($_GET['id']);
-				require '..\template\Backend\editpost.php';
-			}
-		}else{
-			echo "accès interdit au non admins!";
+			header("Location: index.php?action=admin");
 		}
+	
+		require '..\template\Backend\editpost.php';
+	
 	}
 
 	public function delete()
 	{
-		if (isset($_SESSION['username']) && !empty($_SESSION['username'])) {
-			$postManager = new PostManager();
-			$post = $postManager->detailPost($_GET['id']);
-			if($post){
-
-				$postManager->delete($post);
-				header("Location:index.php?action=admin");
-			}else{
-				echo "article introuvable";
-			}
-		}else{
-			echo "accès interdit au non admins!";
-		}
+		
+		$postManager = new PostManager();
+		$post = $postManager->detailPost($_GET['id']);
+		$postManager->delete($post);
+		header("Location:index.php?action=admin");
+					
 	}
 
 	public function listAdminPosts()
 	{
-		if (isset($_SESSION['username']) && !empty($_SESSION['username'])) {
-			$postManager = new PostManager();
-			$posts = $postManager->listAllPosts();
 		
-			require '..\template\Backend\index.php';
-		}else{
-			echo "accès interdit au non admins!";
-		}
+		$postManager = new PostManager();
+		$posts = $postManager->listAllPosts();
+	
+		require '..\template\Backend\index.php';
+		
 	}
 }

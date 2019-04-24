@@ -1,6 +1,7 @@
 <?php 
 session_start();
 require '..\vendor\autoload.php';
+use App\Controller\ErrorController;
 
 $routes = require '../config/routes.php';
 
@@ -10,76 +11,24 @@ if(!isset($_GET['action'])){
 	$action =  $_GET['action'] ;
 }
 
-if(!isset($routes[$action]) or !$action){
-	echo "page introuvable !";
-}else{
-	$controller = $routes[$action]['controller'];
-	$method = $routes[$action]['method'];
+$route = $routes[$action] ?? ["controller" => ErrorController::class, "method" => "show", "private"=>false];
+
+try {
+	//verification si la route est privé
+	if($route['private'] === true){
+		//verifier la session
+		if(!isset($_SESSION['username'])){
+			//changement de l'action 
+			$route = $routes['login'] ;
+		}
+	}
+	$controller = $route['controller'];
+	$method = $route['method'];
 	$object = new $controller();
 	$object->{$method}();
+
+} catch(\Throwable $e) {
+	$object = new ErrorController();
+	$object->show($e->getMessage());
 }
-
-#ajouter un nouveau commentaire
-/*if(isset($_GET['action']) && $_GET['action']=='createcomment'){
-	
-	$commentController->createComment();
-}elseif(isset($_GET['action']) && $_GET['action']=='report' && !empty($_GET['id']) ){
-
-	$commentController->report();
-}
-
-elseif(isset($_GET['action']) && $_GET['action']=='show'){
-	$postController = new PostController();
-	$postController->show();
-
-}elseif(isset($_GET['action']) && $_GET['action'] == "admin" ){
-	
-	$postController->listAdminPosts();
-	
-}elseif (isset($_GET['action']) && $_GET['action'] == 'editpost' && isset($_GET['id']) && !empty($_GET['id'])) {
-	$postController->editPost();
-	
-}elseif (isset($_GET['action']) && $_GET['action'] == 'updatepost') {
-	
-		$postController->updatePost();
-	}
-
-elseif (isset($_GET['action']) && $_GET['action'] == 'deletepost' && isset($_GET['id']) && !empty($_GET['id'])) {
-
-	$postController->deletePost();
-}
-elseif (isset($_GET['action']) && $_GET['action'] == "comment" ) {
-	$commentController->listComment();
-}
-elseif (isset($_GET['action']) && $_GET['action'] == "deletecomment" && isset($_GET['id']) && !empty($_GET['id'])) {
-	
-	$commentController->deleteComment();
-}
-
-elseif(isset($_GET['action']) && $_GET['action'] == "newpost" ){
-
-	$postController->newPost();
-}
-elseif(isset($_GET['action']) && $_GET['action'] == "creatpost" ){
-
-	$postController->createPost();
-}
-#formlogin
-elseif (isset($_GET['action']) && $_GET['action'] == 'formlogin') {
-	require '..\template\Backend\login.html';
-}
-#login
-elseif (isset($_GET['action']) && $_GET['action'] == 'login') {
-		$login = new SecurityController();
-		$login->login();
-}elseif (isset($_GET['action']) && $_GET['action'] == 'logout'){
-	$security = new SecurityController();
-	$security->logout();
-}
-else{
-	#afficher list post
-	$postController = new PostController();
-	$postController->listPosts();
-}*/
-
 

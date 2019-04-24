@@ -4,38 +4,32 @@ use App\Manager\CommentManager;
 use App\Model\Comment;
 
 class CommentController{
-
+    // affichage des commentaires dans l'admin
 	public function liste(){
-		if(isset($_SESSION['username']) && !empty($_SESSION['username'])){
-			$commentManager = new commentManager();
-			$comments = $commentManager->listAllComments();
-			require '..\template\Backend\commentAdmin.php';
-		}else{
-			echo "l'accés est interdit";
-		}
-	}
-
-	public function delete(){
-		if(isset($_SESSION['username']) && !empty($_SESSION['username'])){
-			
-			$id = $_GET['id'];
-			$commentManager = new commentManager();
-			$comment = $commentManager->getComment($id);
-			if($comment ){
-				$commentManager->delete($comment);
-			}else{
-				echo "le commentaire est introuvable";
-			}
-			
-			header("Location: index.php?action=list-comments");
+		$commentManager = new commentManager();
+		$comments = $commentManager->listAllComments();
+		require '..\template\Backend\commentAdmin.php';
 		
-		}else{
-			echo "l'accés est interdit";
-		}
+	}
+	//supression des commentaires signalés
+	public function delete(){
+		$id = $_GET['id'];
+		$commentManager = new commentManager();
+		$comment = $commentManager->getComment($id);
+		$commentManager->delete($comment);
+		header("Location: index.php?action=list-comments");
 	}
 
 	function create(){
-		if(isset($_POST['username']) && isset($_POST['mail'])&& isset($_POST['comment']) && isset($_POST['post_id']) &&  !empty($_POST['username']) && !empty($_POST['mail']) && !empty($_POST['comment']) && !empty($_POST['post_id']) ) {
+		if( $_SERVER['REQUEST_METHOD'] == 'POST' 
+			&& isset($_POST['username']) 
+			&& isset($_POST['mail']) 
+			&& isset($_POST['comment']) 
+			&& isset($_POST['post_id']) 
+			&& !empty($_POST['username']) 
+			&& !empty($_POST['mail']) 
+			&& !empty($_POST['comment']) 
+			&& !empty($_POST['post_id'])) {
 
 			$comment = new Comment();
 			$comment->setUsername($_POST['username']);
@@ -63,7 +57,7 @@ class CommentController{
 		$commentManager->addReport($commentReport);
 
 		header("Location:index.php?action=detailpost&id=".$commentReport->getPost());
-		echo "le commentaire a bien été signalé !";
+	
 	}
 	
 }

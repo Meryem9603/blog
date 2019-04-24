@@ -9,5 +9,7 @@
      "autoload": {
         "psr-4": {"App\\": "src/"}
     },
-    "require": {}
+    "require": {
+        "zendframework/zend-diactoros": "^2.1"
+    }
 }
