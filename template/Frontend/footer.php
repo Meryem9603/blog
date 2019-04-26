@@ -2,26 +2,18 @@
 
 <footer class="col-lg-12">
 <div class="row">
-<div class="col-lg-4">
+<div class="col-lg-6">
 <p class="title_footer">Jean Forteroche</p>
 <p>Acteur et écrivain</p>
 </div>
 
-<div class="col-lg-4">
+<div class="col-lg-6">
 <p class="title_footer">Informations</p>
 <p><a href="#" class="text_footer">Mentions légales</a><br />
 <a href="#" class="text_footer" >Politique de Confidentialité</a></p>
 </div>
 
-<div class="col-lg-4">
-<p class="title_footer">Me suivre sur les réseaux</p>
-<p>
 
-<a href="#"><i class="fa fa-facebook-official" class="icone_footer" ></i></a>
-<a href="#"><i class="fa fa-twitter" class="icone_footer" ></i></a>
-<a href="#"><i class="fa fa-instagram" class="icone_footer" ></i></a>
-</p>
-</div>
 </div>
 </footer>
 

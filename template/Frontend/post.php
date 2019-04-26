@@ -12,7 +12,7 @@
         <img class="card-img-top" src="admin/uploads/<?= $post->getPicture() ?>" width=730 height=412 alt="image"/>
     <?php  
     } else{?>
-        <img class="card-img-top" src="alaska.jpg" alt="image"/>
+        <img class="card-img-top" src="ecrivain.jpg" alt="image"/>
   <?php
     }?>
 <p>
@@ -23,8 +23,8 @@
 </article>
 
 
-<nav class="col-lg-3 offset-lg-1">
-<ul class="list-group">
+<nav class="col-lg-3 offset-lg-1" id ="scroll-posts">
+<ul class="list-group" >
 
 <?php foreach ($allPosts as $post) { ?>
 

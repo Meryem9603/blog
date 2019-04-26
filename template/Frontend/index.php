@@ -3,16 +3,16 @@
 
 
   <div class="container" >
-    <div class="row intro" >
-      <div class="col-md-6"><p><img src="alaska.jpg" alt="photo de l'alaska" id="alaska"></p></div>
-       <div class="col-md-5"><p>Bonjour, je suis Jean Forteroche, acteur et écrivain, je vous souhaite la bienvenue sur mon blog où vous allez trouver la version numérique de mon dernier roman intitulé ‘Billet simple pour l’Alaska‘, N’hésitez pas à y laisser des commentaires.
+    <div class="row intro d-flex justify-content-between" >
+      <div class="col-md-4" id ="img-writer"><p><img src="ecrivain.jpg" alt="photo de l'ecrivain" width="500px" height="320px"></p></div>
+       <div class="col-md-5 bg-light" id = "description">Bonjour, je suis Jean Forteroche, acteur et écrivain, je vous souhaite la bienvenue sur mon blog où vous allez trouver la version numérique de mon dernier roman intitulé : <strong>Billet simple pour l’Alaska</strong>. <br/> N’hésitez pas à y laisser des commentaires.
        Je vous souhaite une bonne lecture.
 
-</p></div>
+</div>
     </div>
   </div>
 
-  <div class="container">
+  <div class="container" id="bloc-posts">
 
           <div class="row">
            
@@ -24,7 +24,7 @@
                   <img class="card-img-top" src="admin/uploads/<?= $post->getPicture() ?>" width=348 height=196 alt="image"/>
               <?php  
               } else{?>
-                  <img class="card-img-top" src="alaska.jpg" alt="image"/>
+                  <img class="card-img-top" src="ecrivain.jpg" alt="image"/>
             <?php
               }
 
@@ -51,25 +51,31 @@
             
 
 
-<nav aria-label="...">
+<nav aria-label="..." id = "nav-paginnation">
   <ul class="pagination">
    <?php for ($i=1; $i <= $total_pages ; $i++) { ?>
+   
     
-     <li class="page-item "> 
-      <?php echo '<a class="page-link" href="?page='.$i.'">'.$i.'</a>' ?>
+     <li class="page-item <?php if( isset($_GET['page']) && $_GET['page'] == $i){ echo 'active' ; }?>">
+
+      <?php echo '<a class="page-link ml-1" href="?page='.$i.'">'.$i.'</a>' ?>
     
       </li>
 
      <?php
+
    }
     
     
   ?> 
+
   </ul>
 </nav>
 
 
-          </div>
-        </div>
+
+
+</div>
+</div>
 
 <?php include('footer.php'); ?>
