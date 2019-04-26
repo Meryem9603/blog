@@ -50,7 +50,7 @@ class CommentManager extends Manager {
 	}
 	
 	public function delete($commentObjet){
-		$query =$this->db->prepare('DELETE FROM comment where id=:id');
+		$query =$this->db->prepare('DELETE FROM comment WHERE id=:id');
 		$query->bindValue(':id',$commentObjet->getId());
 		$query->execute();
 	}

@@ -9,8 +9,8 @@
 
 <div class="col-lg-6">
 <p class="title_footer">Informations</p>
-<p><a href="#" class="text_footer">Mentions légales</a><br />
-<a href="#" class="text_footer" >Politique de Confidentialité</a></p>
+
+<a href="../template/Frontend/politique.html" class="text_footer" >Politique de Confidentialité</a></p>
 </div>
 
 

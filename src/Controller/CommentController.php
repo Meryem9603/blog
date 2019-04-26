@@ -6,7 +6,7 @@ use App\Model\Comment;
 class CommentController{
     // affichage des commentaires dans l'admin
 	public function liste(){
-		$commentManager = new commentManager();
+		$commentManager = new CommentManager();
 		$comments = $commentManager->listAllComments();
 		require '..\template\Backend\commentAdmin.php';
 		
@@ -14,7 +14,7 @@ class CommentController{
 	//supression des commentaires signalés
 	public function delete(){
 		$id = $_GET['id'];
-		$commentManager = new commentManager();
+		$commentManager = new CommentManager();
 		$comment = $commentManager->getComment($id);
 		$commentManager->delete($comment);
 		header("Location: index.php?action=list-comments");
@@ -36,7 +36,7 @@ class CommentController{
 			$comment->setMail($_POST['mail']);
 			$comment->setComment($_POST['comment']);
 			$comment->setPost($_POST['post_id']);
-			$commentManager = new commentManager();
+			$commentManager = new CommentManager();
 			$commentManager->add($comment);
 			header("Location:index.php?action=detailpost&id=".$_POST['post_id']);
 		
@@ -47,7 +47,7 @@ class CommentController{
 
 	public function report()
 	{
-		$commentManager = new commentManager();
+		$commentManager = new CommentManager();
 		// récupérer le commentaire
 		$commentReport = $commentManager->getComment($_GET['id']);
 		$report = (int)$commentReport->getReport();
