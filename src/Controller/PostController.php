@@ -3,6 +3,7 @@ namespace App\Controller;
 use App\Manager\PostManager;
 use App\Manager\CommentManager;
 use App\Model\Post;
+use App\Model\Comment;
 
 class PostController 
 {
@@ -10,7 +11,7 @@ class PostController
 	public function liste()
 	{
 		$limit = 9;
-		#afficher list post
+		
 		if(isset($_GET['page'])){
 			$page = $_GET['page'];
 		} else {
@@ -25,14 +26,14 @@ class PostController
 	}
 
 	public function show(){
+		// show one post with its comments
 		
-		#get post from DB
 		$postManager = new PostManager();
 		$post = $postManager->detailPost($_GET['id']);
 		$commentManager = new CommentManager();
 		$comments = $commentManager->listComments($post);
 		$allPosts = $postManager->listAllPosts();
-		#require post template
+		
 		require '..\template\Frontend\post.php';	
 	}
 
@@ -65,6 +66,30 @@ class PostController
 		
 	}
 
+
+	public function createComment(){
+		if( $_SERVER['REQUEST_METHOD'] == 'POST' 
+			&& isset($_POST['username']) 
+			&& isset($_POST['mail']) 
+			&& isset($_POST['comment']) 
+			&& isset($_POST['post_id']) 
+			&& !empty($_POST['username']) 
+			&& !empty($_POST['mail']) 
+			&& !empty($_POST['comment']) 
+			&& !empty($_POST['post_id'])) {
+			$comment = new Comment();
+			$comment->setUsername($_POST['username']);
+			$comment->setMail($_POST['mail']);
+			$comment->setComment($_POST['comment']);
+			$comment->setPost($_POST['post_id']);
+			$commentManager = new CommentManager();
+			$commentManager->add($comment);
+			header("Location:index.php?action=detailpost&id=".$_POST['post_id']);
+		
+		}else{
+			echo "Veuillez remplir tous les champs !";
+		}
+	}
 	
 
 	public function update()
@@ -111,4 +136,6 @@ class PostController
 		require '..\template\Backend\index.php';
 		
 	}
+
+
 }

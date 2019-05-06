@@ -10,7 +10,7 @@
 
 </div>
     </div>
-  </div>
+  </div> 
 
   <div class="container" id="bloc-posts">
 

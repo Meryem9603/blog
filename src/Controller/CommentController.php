@@ -20,30 +20,8 @@ class CommentController{
 		header("Location: index.php?action=list-comments");
 	}
 
-	function create(){
-		if( $_SERVER['REQUEST_METHOD'] == 'POST' 
-			&& isset($_POST['username']) 
-			&& isset($_POST['mail']) 
-			&& isset($_POST['comment']) 
-			&& isset($_POST['post_id']) 
-			&& !empty($_POST['username']) 
-			&& !empty($_POST['mail']) 
-			&& !empty($_POST['comment']) 
-			&& !empty($_POST['post_id'])) {
-
-			$comment = new Comment();
-			$comment->setUsername($_POST['username']);
-			$comment->setMail($_POST['mail']);
-			$comment->setComment($_POST['comment']);
-			$comment->setPost($_POST['post_id']);
-			$commentManager = new CommentManager();
-			$commentManager->add($comment);
-			header("Location:index.php?action=detailpost&id=".$_POST['post_id']);
-		
-		}else{
-			echo "Veuillez remplir tous les champs !";
-		}
-	}
+	
+  
 
 	public function report()
 	{

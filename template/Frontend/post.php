@@ -44,7 +44,7 @@
     <div class="row">
         <div class="col-md-8">
           <div class="page-header">
-            <h1><small class="pull-right"><?=count($comments)?> comments</small> Comments </h1>
+            <h1><small class="pull-right"><?=count($comments)?> Commentaire(s) </small> commentaire </h1>
           </div> 
            <div class="list-group">
                <?php 

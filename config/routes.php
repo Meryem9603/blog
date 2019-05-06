@@ -10,7 +10,7 @@ return [
 	'detailpost'  =>['controller'=> PostController::class, 'method'=>'show', 'private'=>false],
 	'home'  =>['controller'=> PostController::class, 'method'=>'liste', 'private'=>false],
 	'admin' => ['controller'=> PostController::class, 'method'=>'listAdminPosts', 'private'=>true],
-	'createcomment' =>['controller'=> CommentController::class, 'method'=>'create', 'private'=>false],
+	'createcomment' =>['controller'=> PostController::class, 'method'=>'createComment', 'private'=>false],
 	'show-comment'  =>['controller'=> CommentController::class, 'method'=>'show', 'private'=>false],
 	'list-comments'  =>['controller'=> CommentController::class, 'method'=>'liste', 'private'=>true],
 	'deletecomment' =>['controller'=> CommentController::class, 'method'=>'delete', 'private'=>true],

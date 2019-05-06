@@ -49,7 +49,7 @@
           <input type="hidden" name="id"  value="<?=$post->getId()?>">
           <div class="form-group">
             <div class="form-label-group">
-             <textarea class="form-control" rows="10" name="content"><?=$post->getContent()?></textarea>
+             <textarea id ="content" class="form-control" rows="10" name="content"><?=$post->getContent()?></textarea>
             </div>
    
           </div>
@@ -61,6 +61,12 @@
 
       </div>
       <!-- /.container-fluid -->
+       <script src="https://cloud.tinymce.com/5/tinymce.min.js?apiKey=r1w9edpm847iapdh3y4svpyqq0s4081uv050bvgdhiywxltx"></script>
 
+       <script>
+      tinymce.init({
+        selector: '#content'
+      });
+  </script>
       <!-- Sticky Footer -->
       <?php require 'footer.php'; ?>

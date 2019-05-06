@@ -10,6 +10,7 @@ abstract class Manager
 	public function __construct(){
 		$this->connect();
 	}
+	//connexion to database
 	public function connect(){
 		
 			$this->db = new \PDO ('mysql:host=localhost;dbname=blog', 'root', '');
