@@ -65,7 +65,7 @@
                ?>
                <div class="list-group-item flex-column align-items-start ">
                 <div class="col-md-8 ">
-                   <form method="POST" action='?action=createcomment'>
+                   <form method="POST" >
                       <label>Nom et Prénom :</label>
                       <input type="text" name="username" class="form-control" >
                       <label>Adresse é-mail :</label>
