@@ -1,18 +1,10 @@
 <?php
 namespace App\Controller;
+use App\Manager\Manager;
 
-class SecurityController 
+class SecurityController extends Manager
 {
-	private $db;
-
-	function __construct()
-	{
-		$this->db = new \PDO ('mysql:host=localhost;dbname=blog', 'root', '');
-	    $this->db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
-	    $this->db->exec("set names utf8");
-
-	}
-
+	
 	public function login()
 	{
 		if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['username']) && isset($_POST['password']) &&!empty($_POST['username']) && !empty($_POST['password']) )
@@ -52,5 +44,14 @@ class SecurityController
 		session_destroy(); //destroy the session
 		header("location: index.php?action=home"); //to redirect back to "index.php" after logging out
 		exit();
+	}
+
+	public function add($object){
+	}
+
+	public function update($object){
+	}
+
+	public function delete($object){
 	}
 }
