@@ -22,12 +22,13 @@ try {
 			$route = $routes['login'] ;
 		}
 	}
+	
 	$controller = $route['controller'];
 	$method = $route['method'];
 	$object = new $controller();
 	$object->{$method}();
 
-} catch(\Throwable $e) {
+} catch(Throwable $e) {
 	$object = new ErrorController();
 	$object->show($e->getMessage());
 }

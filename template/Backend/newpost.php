@@ -22,7 +22,7 @@
         <div class="card mb-3">
           <div class="card-header">
             <i class="fas fa-table"></i>
-            Liste articles <div class="float-right"> <a href="?action=newpost" class="btn btn-success">Ajouter un article</a></div></div>
+            Liste articles <div class="float-right"> <a href="?action=create-post" class="btn btn-success">Ajouter un article</a></div></div>
 
           <div class="card-body">
             <form method="POST" action="?action=create-post" enctype="multipart/form-data">

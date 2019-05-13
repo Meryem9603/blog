@@ -4,7 +4,7 @@
 
   <div class="container" >
     <div class="row intro d-flex justify-content-between" >
-      <div class="col-md-4" id ="img-writer"><p><img src="ecrivain.jpg" alt="photo de l'ecrivain" width="500px" height="320px"></p></div>
+      <div class="col-md-7" id ="img-writer"><p><img src="ecrivain.jpg" alt="photo de l'ecrivain" width="500px" height="320px"></p></div>
        <div class="col-md-5 bg-light" id = "description">Bonjour, je suis Jean Forteroche, acteur et écrivain, je vous souhaite la bienvenue sur mon blog où vous allez trouver la version numérique de mon dernier roman intitulé : <strong>Billet simple pour l’Alaska</strong>. <br/> N’hésitez pas à y laisser des commentaires.
        Je vous souhaite une bonne lecture.
 
@@ -19,16 +19,10 @@
             <?php foreach ($posts as $post) {?>
              <div class="col-md-4">
               <div class="card mb-4 box-shadow">
-              <?php 
-              if ($post->getPicture()) {?>
+              
+              
                   <img class="card-img-top" src="admin/uploads/<?= $post->getPicture() ?>" width=348 height=196 alt="image"/>
-              <?php  
-              } else{?>
-                  <img class="card-img-top" src="ecrivain.jpg" alt="image"/>
-            <?php
-              }
-
-              ?>
+        
                
                 <div class="card-body">
                   <p class="card-text">

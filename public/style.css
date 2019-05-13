@@ -2,11 +2,16 @@ header{
 	background-color: #8ad6f9 ;
 	padding-bottom: 20px;
 }
-
+img {
+	max-width: 100%
+}
 #title_blog{
 	font-size: 40px;
 	font-family: 'ZCOOL XiaoWei', serif;
 	color: white;
+	text-align: center;
+}
+.formconnexion {
 	text-align: center;
 }
 #description{

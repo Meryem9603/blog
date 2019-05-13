@@ -15,10 +15,11 @@ class PostManager extends Manager{
 	}
 	//update post
 	public function update($objectPost){
-		$query =$this->db->prepare('UPDATE post SET author =:author ,title =:title, content=:content, updated=NOW() WHERE id=:id ');
+		$query =$this->db->prepare('UPDATE post SET author =:author ,title =:title, content=:content, picture=:picture, updated=NOW() WHERE id=:id ');
 		$query->bindValue(':author',$objectPost->getAuthor());
 		$query->bindValue(':title',$objectPost->getTitle());
 		$query->bindValue(':content',$objectPost->getContent());
+		$query->bindValue(':picture',$objectPost->getPicture());
 		$query->bindValue(':id',$objectPost->getId());
 		$query->execute();
 	}

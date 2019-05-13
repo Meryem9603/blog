@@ -12,7 +12,7 @@ class PostController
 	{
 		$limit = 9;
 		
-		if(isset($_GET['page'])){
+		if(isset($_GET['page']) && is_numeric($_GET['page'])){
 			$page = $_GET['page'];
 		} else {
 			$page = 1;
@@ -67,7 +67,7 @@ class PostController
 			&& !empty($_POST['title']) 
 			&& !empty($_POST['content']) 
 			&& isset($_FILES['image']) 
-			&& !empty($_FILES['image'])){
+			&& !empty($_FILES['image']['name'])){
 
 				$post = new Post();
 				$post->setAuthor("Jean Forteroche");
@@ -103,6 +103,14 @@ class PostController
 
 			$post->setTitle($_POST['title']);
 			$post->setContent($_POST['content']);
+			
+			if(!empty($_FILES['image']['name'])) {
+			$image_name = "";
+				require 'upload.php';
+				if(!empty($image_name)){
+					$post->setPicture($image_name);
+				}
+			}
 
 			$postManager->update($post);
 

@@ -7,14 +7,10 @@
 <article class="col-lg-8">
 <h1><?php echo $post->getTitle()?></h1>
 
-<?php 
-    if ($post->getPicture()) {?>
+
         <img class="card-img-top" src="admin/uploads/<?= $post->getPicture() ?>" width=730 height=412 alt="image"/>
-    <?php  
-    } else{?>
-        <img class="card-img-top" src="ecrivain.jpg" alt="image"/>
-  <?php
-    }?>
+   
+        
 <p>
 <?php echo $post->getContent()?>
 </p>
@@ -44,7 +40,7 @@
     <div class="row">
         <div class="col-md-8">
           <div class="page-header">
-            <h1><small class="pull-right"><?=count($comments)?> Commentaire(s) </small> commentaire </h1>
+            <h3><?=count($comments)?> Commentaire(s) </h3>
           </div> 
            <div class="list-group">
                <?php 

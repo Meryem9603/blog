@@ -24,8 +24,8 @@
 <header class="col-lg-12"><p id="title_blog">Billet simple pour l'Alaska</p>
   
 
-  <form class="col-lg-3 mx-auto ">
-    <a href="/Blog/public/index.php?action=home" id="accueil" class="btn btn-secondary btn-lg">Accueil</a>
+  <form class="col-lg-12 formconnexion mx-auto ">
+    <a href="?action=home" id="accueil" class="btn btn-secondary btn-lg">Accueil</a>
     <a  href="?action=login" class="btn btn-secondary btn-lg">Connexion</a>
   </form>
 </header>

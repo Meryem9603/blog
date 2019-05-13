@@ -21,10 +21,10 @@
         <div class="card mb-3">
           <div class="card-header">
             <i class="fas fa-table"></i>
-            Liste articles <div class="float-right"> <a href="?action=newpost" class="btn btn-success">Ajouter un article</a></div></div>
+            Liste articles <div class="float-right"> <a href="?action=create-post" class="btn btn-success">Ajouter un article</a></div></div>
 
           <div class="card-body">
-            <form method="POST" action="?action=update-post"  enctype="multipart/form-data">
+            <form method="POST" action="?action=update-post&id=<?=$post->getId()?>"  enctype="multipart/form-data">
           <div class="form-group">
             <div class="form-row">
               
@@ -40,7 +40,7 @@
             <div class="form-row">
               <div class="col-md-6">
                 <div class="form-label-group">
-                  <input type="file" id="Image" name="image" class="form-control" placeholder="Image" required="required" value="">
+                  <input type="file" id="Image" name="image" class="form-control" placeholder="Image"  value="">
                   <label for="Image">Image</label>
                 </div>
               </div>
